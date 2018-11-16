@@ -14,7 +14,7 @@ public class User {
 	
 	private HashSet<Jeu> listeJeux;
 	private HashSet<Reservation> listeRes;
-	private HashSet<Pret> listePret;
+	private HashSet<Pret> listePrets;
 
 	//Constructeurs
 	
@@ -26,9 +26,9 @@ public class User {
 		this.password = password;
 		this.solde = solde;
 		this.admin = admin;
-		this.listeJeux = new HashSet<Jeu>;
-		this.listeRes = new HashSet<Reservation>;
-		this.listePret = new HashSet<Pret>;
+		this.listeJeux = new HashSet<Jeu>();
+		this.listeRes = new HashSet<Reservation>();
+		this.listePrets = new HashSet<Pret>();
 		
 	}
 	
