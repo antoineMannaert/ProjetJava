@@ -12,9 +12,9 @@ public class User {
 	private int solde;
 	private boolean admin;
 	
-	private HashSet<Jeu> listeJeux;
-	private HashSet<Reservation> listeRes;
-	private HashSet<Pret> listePrets;
+	private Set<Jeu> listeJeux;
+	private Set<Reservation> listeRes;
+	private Set<Pret> listePrets;
 
 	//Constructeurs
 	
