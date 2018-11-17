@@ -6,7 +6,7 @@ public class Jeu {
 	
 	//attributs
 	
-	private int idJeu
+	private int idJeu;
 	private String nom;
 	private boolean dispo;
 	private int tarif;
