@@ -31,7 +31,7 @@ public class PretDAO extends DAO<Pret>{
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Pret WHERE idPret = " + id);
 			if(result.first())
-				p = new Pret(id, result.getString("nomPret"), result.getDate("dateDebut"), result.getDate("dateFin"), result.getBoolean("confirmation"), result.getInt("idUser"), result.getInt("idEx"));
+				p = new Pret(id, result.getDate("dateDebut"), result.getDate("dateFin"), result.getBoolean("confirmation"), result.getInt("idUser"), result.getInt("idEx"));
 		}
 		catch(SQLException e){
 			e.printStackTrace();

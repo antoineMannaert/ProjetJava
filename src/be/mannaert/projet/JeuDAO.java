@@ -29,7 +29,7 @@ public class JeuDAO extends DAO<Jeu>{
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE idJeu = " + id);
 			if(result.first())
-				j = new Jeu(id, result.getString("nomJeu"), result.getInt("tarif"), result.getBoolean("disponible"), result.getInt("idJeu"));
+				j = new Jeu(id, result.getString("nomJeu"), result.getInt("tarif"), result.getBoolean("disponible"));
 		}
 		catch(SQLException e){
 			e.printStackTrace();

@@ -31,7 +31,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ExemplaireJeu WHERE idExemplaire = " + id);
 			if(result.first())
-				ex = new Exemplaire(id, result.getString("nomEx"), result.getBoolean("disponible"), result.getInt("idJeu"));
+				ex = new Exemplaire(id, result.getBoolean("disponible"), result.getInt("idJeu"), result.getInt("idUser"));
 		}
 		catch(SQLException e){
 			e.printStackTrace();
