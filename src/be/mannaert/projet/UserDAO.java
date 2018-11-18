@@ -24,18 +24,18 @@ public class UserDAO extends DAO<User> {
 	
 	public User find(int id){
 		
-		User eleve = new User();
+		User u = new User();
 		
 		try{
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM User WHERE idUser = " + id);
 			if(result.first())
-				eleve = new User(id, result.getString("pseudo"), result.getString("mdp"), result.getInt("solde"), result.getBoolean("admin"));
+				u = new User(id, result.getString("pseudo"), result.getString("mdp"), result.getInt("solde"), result.getBoolean("admin"));
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
-		return eleve;
+		return u;
 	}
 }
