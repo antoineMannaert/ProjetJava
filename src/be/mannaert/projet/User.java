@@ -12,7 +12,7 @@ public class User {
 	private int solde;
 	private boolean admin;
 	
-	private Set<Jeu> listeJeux;
+	private Set<Exemplaire> listeExemplaires;
 	private Set<Reservation> listeRes;
 	private Set<Pret> listePrets;
 
@@ -26,7 +26,7 @@ public class User {
 		this.password = password;
 		this.solde = solde;
 		this.admin = admin;
-		this.listeJeux = new HashSet<Jeu>();
+		this.listeExemplaires = new HashSet<Exemplaire>();
 		this.listeRes = new HashSet<Reservation>();
 		this.listePrets = new HashSet<Pret>();
 		

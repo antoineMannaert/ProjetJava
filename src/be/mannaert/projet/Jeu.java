@@ -8,7 +8,6 @@ public class Jeu {
 	
 	private int idJeu;
 	private String nom;
-	private boolean dispo;
 	private int tarif;
 	
 	private Set<Exemplaire> listeExemplaires;
@@ -18,10 +17,9 @@ public class Jeu {
 	
 	public Jeu() {}
 	
-	public Jeu(int idJeu, String nom, boolean dispo, int tarif) {
+	public Jeu(int idJeu, String nom, int tarif) {
 		this.idJeu = idJeu;
 		this.nom = nom;
-		this.dispo = dispo;
 		this.tarif = tarif;
 		this.listeExemplaires = new HashSet<Exemplaire>();
 		this.listeReservation = new HashSet<Reservation>();
@@ -37,10 +35,6 @@ public class Jeu {
 		return this.nom;
 	}
 	
-	public boolean getDispo() {
-		return this.dispo;
-	}
-	
 	public int getTarif() {
 		return this.tarif;
 	}
@@ -53,10 +47,6 @@ public class Jeu {
 	
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-	
-	public void setDispo(boolean dispo) {
-		this.dispo = dispo;
 	}
 	
 	public void setTarif(int tarif) {
