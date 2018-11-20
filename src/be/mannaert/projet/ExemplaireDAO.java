@@ -11,15 +11,45 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 	}
 	
 	public boolean create(Exemplaire ex){		
-		return false;
+		
+		try {
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Exemplaire (disponible, idJeu, idUser) SET (" + ex.getDisponible() + "");");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean delete(Exemplaire ex){
-		return false;
+
+		try {
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Exemplaire WHERE idExemplaire = " + ex.getIdExemplaire() + ");");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean update(Exemplaire ex){
-		return false;
+		
+		try {
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Exemplaire SET disponibilité = " + ex.getDisponible + ");");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	public Exemplaire find(int id){
