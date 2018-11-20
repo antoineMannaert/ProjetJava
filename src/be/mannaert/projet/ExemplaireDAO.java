@@ -56,9 +56,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		
 		Exemplaire ex = new Exemplaire();
 		Jeu j = new Jeu();
-		Console c = new Console();
 		DAO<Jeu> jdao = new JeuDAO(ProjetConnection.getInstance());
-		DAO<Console> cdao = new ConsoleDAO(ProjetConnection.getInstance());
 		
 		try{
 			
@@ -69,9 +67,8 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 			if(result.first()) {
 				
 				j = jdao.find(result.getInt("idJeu"));
-				c = cdao.find(j.getConsole().getIdConsole());
 							
-				ex = new Exemplaire(id, result.getBoolean("disponible"), j, c);
+				ex = new Exemplaire(id, result.getBoolean("disponible"), j, j.getConsole());
 			}
 		}
 		catch(SQLException e){
