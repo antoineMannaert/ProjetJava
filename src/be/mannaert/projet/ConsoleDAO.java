@@ -43,7 +43,7 @@ public class ConsoleDAO extends DAO<Console> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Console SET nomConsole = " + c.getNomConsole() + ", diminutif = " + c.getDiminutif() + ", anneeS WHERE idConsole = " + c.getIdConsole() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Console SET nomConsole = " + c.getNom() + ", diminutif = " + c.getDiminutif() + ", anneeS WHERE idConsole = " + c.getIdConsole() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -63,12 +63,6 @@ public class ConsoleDAO extends DAO<Console> {
 			if(result.first()) {
 				c = new Console(id, result.getString("nomConsole"), result.getString("diminutif"));
 			}
-			
-			result = this.connect.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE idConsole = " + id + ";");
-			while(result.next())
-				c.AjouterListeJeux(/*...*/));
 		}
 		catch(SQLException e){
 			e.printStackTrace();
