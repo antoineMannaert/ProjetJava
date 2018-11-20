@@ -9,15 +9,17 @@ public class Reservation {
 	private int idRes;
 	private Date dateRes;
 	private String etatRes;
+	private Jeu j;
 	
 	//Constructeurs
 	
 	public Reservation() { }
 	
-	public Reservation (int idRes, Date dateRes, String etatRes) {
+	public Reservation (int idRes, Date dateRes, String etatRes, Jeu j) {
 		this.idRes = idRes;
 		this.dateRes = dateRes;
 		this.etatRes = etatRes;
+		this.j = j;
 	}
 	
 	//Getters
@@ -34,11 +36,11 @@ public class Reservation {
 		return this.etatRes;
 	}
 	
-	//Setters
-	
-	public void setIdRes(int idRes) {
-		this.idRes = idRes;
+	public Jeu getJeu() {
+		return this.j;
 	}
+	
+	//Setters
 	
 	public void setDateRes(Date dateRes) {
 		this.dateRes = dateRes;
@@ -47,5 +49,8 @@ public class Reservation {
 	public void setEtatRes(String etatRes) {
 		this.etatRes = etatRes;
 	}
-
+	
+	public void setJeu(Jeu j) {
+		this.j = j;
+	}
 }

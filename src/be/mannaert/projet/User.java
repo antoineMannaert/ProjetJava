@@ -56,10 +56,6 @@ public class User {
 	
 	//Setters
 	
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-	
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
@@ -74,5 +70,25 @@ public class User {
 	
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+	
+	//Méthodes d'ajout dans les ensembles
+	
+	public void AjouterExemplaire(Exemplaire ex) {
+		this.listeExemplaires.add(ex);
+	}
+	
+	public void AjouterRes(Reservation res) {
+		this.listeRes.add(res);
+	}
+	
+	public void AjouterPret(Pret p) {
+		this.listePrets.add(p);
+	}
+	
+	//Méthodes de suppression dans la liste des exemplaires
+	
+	public void RetirerExemplaire(Exemplaire ex) {
+		this.listeExemplaires.remove(ex);
 	}
 }

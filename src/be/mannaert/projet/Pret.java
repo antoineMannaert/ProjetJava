@@ -10,16 +10,18 @@ public class Pret {
 	private Date dateDebut;
 	private Date dateFin;
 	private boolean conf;
+	private Exemplaire ex;
 	
 	//Constructeurs
 	
 	public Pret() {	}
 	
-	public Pret(int idPret, Date dateDebut, Date dateFin, boolean conf) {
+	public Pret(int idPret, Date dateDebut, Date dateFin, boolean conf, Exemplaire ex) {
 		this.idPret = idPret;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.conf = conf;
+		this.ex = ex;
 	}
 	
 	//Getters
@@ -40,11 +42,11 @@ public class Pret {
 		return this.conf;
 	}
 	
-	//Setters
-	
-	public void setIdPret(int idPret) {
-		this.idPret = idPret;
+	public Exemplaire getExemplaire() {
+		return this.ex;
 	}
+	
+	//Setters
 	
 	public void setDateDebut(Date dateDebut) {
 		this.dateDebut = dateDebut;
@@ -56,5 +58,9 @@ public class Pret {
 	
 	public void setConf(boolean conf) {
 		this.conf = conf;
+	}
+	
+	public void setExemplaire(Exemplaire ex) {
+		this.ex = ex;
 	}
 }

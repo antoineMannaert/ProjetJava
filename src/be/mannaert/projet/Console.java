@@ -1,7 +1,5 @@
 package be.mannaert.projet;
 
-import java.util.*;
-
 public class Console {
 	
 	
@@ -10,20 +8,15 @@ public class Console {
 	private int idConsole;
 	private String nom;
 	private String diminutif;
-	private int annee;
-	
-	private Set<Jeu> listeJeux;
 	
 	//Constructeurs
 	
 	public Console() { }
 	
-	public Console(int idConsole, String nom, String dinimutif, int annee) {
+	public Console(int idConsole, String nom, String diminutif) {
 		this.idConsole = idConsole;
 		this.nom = nom;
 		this.diminutif = diminutif;
-		this.annee = annee;
-		this.listeJeux = new HashSet<Jeu>();
 	}
 	
 	//Getters
@@ -40,15 +33,7 @@ public class Console {
 		return this.diminutif;
 	}
 	
-	public int getAnnee() {
-		return this.annee;
-	}
-	
 	//Setters
-	
-	public void setIdConsole(int idConsole) {
-		this.idConsole = idConsole;
-	}
 	
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -56,10 +41,6 @@ public class Console {
 	
 	public void setDiminutif(String diminutif) {
 		this.diminutif = diminutif;
-	}
-	
-	public void setAnnee(int annee) {
-		this.annee = annee;
 	}
 
 }

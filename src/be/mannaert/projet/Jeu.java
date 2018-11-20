@@ -1,7 +1,5 @@
 package be.mannaert.projet;
 
-import java.util.*;
-
 public class Jeu {
 	
 	//attributs
@@ -9,20 +7,17 @@ public class Jeu {
 	private int idJeu;
 	private String nom;
 	private int tarif;
-	
-	private Set<Exemplaire> listeExemplaires;
-	private Set<Reservation> listeReservation;
+	private Console c;
 	
 	//Constructeurs
 	
 	public Jeu() {}
 	
-	public Jeu(int idJeu, String nom, int tarif) {
+	public Jeu(int idJeu, String nom, int tarif, Console c) {
 		this.idJeu = idJeu;
 		this.nom = nom;
 		this.tarif = tarif;
-		this.listeExemplaires = new HashSet<Exemplaire>();
-		this.listeReservation = new HashSet<Reservation>();
+		this.c = c;
 	}
 	
 	//Getters
@@ -39,11 +34,11 @@ public class Jeu {
 		return this.tarif;
 	}
 	
-	//Setters
-	
-	public void setIdJeu(int idJeu) {
-		this.idJeu = idJeu;
+	public Console getConsole() {
+		return this.c;
 	}
+	
+	//Setters
 	
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -51,5 +46,9 @@ public class Jeu {
 	
 	public void setTarif(int tarif) {
 		this.tarif = tarif;
+	}
+	
+	public void setConsole(Console c) {
+		this.c = c;
 	}
 }

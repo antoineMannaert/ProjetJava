@@ -1,24 +1,21 @@
 package be.mannaert.projet;
 
-import java.util.*;
-
 public class Exemplaire {
 	
 	//attributs
 	
 	private int idExemplaire;
 	private boolean dispo;
-	
-	private Set<Pret> listePrets;
+	private Jeu j;
 	
 	//Constructeurs
 	
 	public Exemplaire() { }
 	
-	public Exemplaire(int idExemplaire, boolean dispo) {
+	public Exemplaire(int idExemplaire, boolean dispo, Jeu j) {
 		this.idExemplaire = idExemplaire;
 		this.dispo = dispo;
-		listePrets = new HashSet<Pret>();
+		this.j = j;
 	}
 	
 	//Getters
@@ -31,14 +28,17 @@ public class Exemplaire {
 		return this.dispo;
 	}
 	
-	//Setters
-	
-	public void setIdExemplaire(int idExemplaire) {
-		this.idExemplaire = idExemplaire;
+	public Jeu getJeu() {
+		return this.j;
 	}
+	
+	//Setters
 	
 	public void setDispo(boolean dispo) {
 		this.dispo = dispo;
 	}
 
+	public void setJeu(Jeu j) {
+		this.j = j;
+	}
 }
