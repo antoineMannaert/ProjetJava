@@ -11,17 +11,19 @@ public class Pret {
 	private Date dateFin;
 	private boolean conf;
 	private Exemplaire ex;
+	private User u;
 	
 	//Constructeurs
 	
 	public Pret() {	}
 	
-	public Pret(int idPret, Date dateDebut, Date dateFin, boolean conf, Exemplaire ex) {
+	public Pret(int idPret, Date dateDebut, Date dateFin, boolean conf, Exemplaire ex, User u) {
 		this.idPret = idPret;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.conf = conf;
 		this.ex = ex;
+		this.u = u;
 	}
 	
 	//Getters
@@ -46,6 +48,10 @@ public class Pret {
 		return this.ex;
 	}
 	
+	public User getUser() {
+		return this.u;
+	}
+	
 	//Setters
 	
 	public void setDateDebut(Date dateDebut) {
@@ -62,5 +68,9 @@ public class Pret {
 	
 	public void setExemplaire(Exemplaire ex) {
 		this.ex = ex;
+	}
+	
+	public void setUser(User u) {
+		this.u = u;
 	}
 }
