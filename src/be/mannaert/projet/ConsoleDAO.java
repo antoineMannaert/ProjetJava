@@ -15,7 +15,7 @@ public class ConsoleDAO extends DAO<Console> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Console (nomConsole, diminutif) VALUES (" + c.getNom() + ", " + c.getDiminutif() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Console (nomConsole, diminutif) VALUES (" + c.getNom() + ", " + c.getDiminutif() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class ConsoleDAO extends DAO<Console> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Console WHERE idConsole = " + c.getIdConsole() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Console WHERE idConsole = " + c.getIdConsole() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class ConsoleDAO extends DAO<Console> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Console SET nomConsole = " + c.getNom() + ", diminutif = " + c.getDiminutif() + ", anneeS WHERE idConsole = " + c.getIdConsole() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Console SET nomConsole = " + c.getNom() + ", diminutif = " + c.getDiminutif() + ", anneeS WHERE idConsole = " + c.getIdConsole() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

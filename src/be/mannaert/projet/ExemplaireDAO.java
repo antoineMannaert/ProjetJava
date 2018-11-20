@@ -15,7 +15,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Exemplaire (disponible, idJeu, idUser) SET (" + ex.getDisponible() + "");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Exemplaire (disponible, idJeu, idUser) SET (" + ex.getDisponible() + ", " + ex.getJeu().getIdJeu() + ", " + ex.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Exemplaire WHERE idExemplaire = " + ex.getIdExemplaire() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Exemplaire WHERE idExemplaire = " + ex.getIdExemplaire() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Exemplaire SET disponibilité = " + ex.getDisponible + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Exemplaire SET disponibilité = " + ex.getDisponible + ", idJeu = " + ex.getJeu().getIdJeu() + ", idUser = " + ex.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -55,13 +55,24 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 	public Exemplaire find(int id){
 		
 		Exemplaire ex = new Exemplaire();
+		Jeu j = new Jeu();
+		Console c = new Console();
+		DAO<Jeu> jdao = new JeuDAO(ProjetConnection.getInstance());
+		DAO<Console> cdao = new ConsoleDAO(ProjetConnection.getInstance());
 		
 		try{
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ExemplaireJeu WHERE idExemplaire = " + id);
-			if(result.first())
-				ex = new Exemplaire(id, result.getBoolean("disponible"), result.getInt("idJeu"), result.getInt("idUser"));
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ExemplaireJeu WHERE idExemplaire = " + id + ");");
+			
+			if(result.first()) {
+				
+				j = jdao.find(result.getInt("idJeu"));
+				c = cdao.find(j.getConsole().getIdConsole());
+							
+				ex = new Exemplaire(id, result.getBoolean("disponible"), j, c);
+			}
 		}
 		catch(SQLException e){
 			e.printStackTrace();
