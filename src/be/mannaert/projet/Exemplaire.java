@@ -7,15 +7,17 @@ public class Exemplaire {
 	private int idExemplaire;
 	private boolean dispo;
 	private Jeu j;
+	private User u;
 	
 	//Constructeurs
 	
 	public Exemplaire() { }
 	
-	public Exemplaire(int idExemplaire, boolean dispo, Jeu j) {
+	public Exemplaire(int idExemplaire, boolean dispo, Jeu j, User u) {
 		this.idExemplaire = idExemplaire;
 		this.dispo = dispo;
 		this.j = j;
+		this.u = u;
 	}
 	
 	//Getters
@@ -32,6 +34,10 @@ public class Exemplaire {
 		return this.j;
 	}
 	
+	public User getUser() {
+		return this.u;
+	}
+	
 	//Setters
 	
 	public void setDispo(boolean dispo) {
@@ -40,5 +46,9 @@ public class Exemplaire {
 
 	public void setJeu(Jeu j) {
 		this.j = j;
+	}
+	
+	public void setUser(User u) {
+		this.u = u;
 	}
 }

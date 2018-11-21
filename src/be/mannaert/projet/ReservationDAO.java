@@ -56,7 +56,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		
 		Reservation r = new Reservation();
 		Jeu j = new Jeu();
-		DAO<Jeu> jdao = new JeuDAO(ProjetConnection.getInstance());
+		DAO<Jeu> jdao = new JeuDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(

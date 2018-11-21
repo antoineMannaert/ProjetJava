@@ -57,8 +57,8 @@ public class PretDAO extends DAO<Pret>{
 		Pret p = new Pret();
 		Exemplaire ex = new Exemplaire();
 		User u = new User();
-		DAO<Exemplaire> edao = new ExemplaireDAO(ProjetConnection.getInstance());
-		DAO<User> udao = new UserDAO(ProjetConnection.getInstance());
+		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
+		DAO<User> udao = new UserDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(

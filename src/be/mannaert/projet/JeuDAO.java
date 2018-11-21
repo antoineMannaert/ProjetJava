@@ -54,7 +54,7 @@ public class JeuDAO extends DAO<Jeu>{
 		
 		Jeu j = new Jeu();
 		Console c = new Console();
-		DAO<Console> cdao = new ConsoleDAO(ProjetConnection.getInstance());
+		DAO<Console> cdao = new ConsoleDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(

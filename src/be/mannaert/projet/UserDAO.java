@@ -15,7 +15,7 @@ public class UserDAO extends DAO<User> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (pseudo, mdp, solde, admin) VALUES (" + u.getPseudo() + ", " + u.getPassword() + ", " + u.getSolde() + ", " + u.getAdimin + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (pseudo, mdp, solde, admin) VALUES (" + u.getPseudo() + ", " + u.getPassword() + ", " + u.getSolde() + ", " + u.getAdmin() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -55,8 +55,8 @@ public class UserDAO extends DAO<User> {
 	public User find(int id){
 		
 		User u = new User();
-		DAO<Exemplaire> edao = new ExemplaireDAO(ProjetConnection.getInstance());
-		DAO<Reservation> rdao = new ReservationDAO(ProjetConnection.getInstance());
+		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
+		DAO<Reservation> rdao = new ReservationDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(

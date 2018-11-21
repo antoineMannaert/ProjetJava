@@ -15,7 +15,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Exemplaire (disponible, idJeu, idUser) SET (" + ex.getDisponible() + ", " + ex.getJeu().getIdJeu() + ", " + ex.getUser().getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Exemplaire (disponible, idJeu, idUser) SET (" + ex.getDispo() + ", " + ex.getJeu().getIdJeu() + ", " + ex.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Exemplaire SET disponibilité = " + ex.getDisponible + ", idJeu = " + ex.getJeu().getIdJeu() + ", idUser = " + ex.getUser().getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Exemplaire SET disponibilité = " + ex.getDispo() + ", idJeu = " + ex.getJeu().getIdJeu() + ", idUser = " + ex.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -56,7 +56,9 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		
 		Exemplaire ex = new Exemplaire();
 		Jeu j = new Jeu();
-		DAO<Jeu> jdao = new JeuDAO(ProjetConnection.getInstance());
+		User u = new User();
+		DAO<Jeu> jdao = new JeuDAO(this.connect);
+		DAO<User> udao = new UserDAO(this.connect);
 		
 		try{
 			
@@ -67,8 +69,9 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 			if(result.first()) {
 				
 				j = jdao.find(result.getInt("idJeu"));
+				u = udao.find(result.getInt("idUser"));
 							
-				ex = new Exemplaire(id, result.getBoolean("disponible"), j, j.getConsole());
+				ex = new Exemplaire(id, result.getBoolean("disponible"), j, u);
 			}
 		}
 		catch(SQLException e){
