@@ -15,7 +15,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Reservation (dateRes, etat, idJeu) VALUES (" + r.getDateRes() + ", " + r.getEtatRes() + ", " + r.getJeu().getIdJeu() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Reservation (dateRes, etat, idJeu) VALUES (Date'" + r.getDateRes() + "', '" + r.getEtatRes() + "', " + r.getJeu().getIdJeu() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Reservation SET dateRes = " + r.getDateRes() + ", etat  = " + r.getEtatRes() + ", idJeu = " + r.getJeu().getIdJeu() +  " WHERE idRes = " + r.getIdRes() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Reservation SET dateRes = Date'" + r.getDateRes() + "', etat  = '" + r.getEtatRes() + "', idJeu = " + r.getJeu().getIdJeu() +  " WHERE idRes = " + r.getIdRes() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

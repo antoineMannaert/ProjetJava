@@ -15,7 +15,7 @@ public class PretDAO extends DAO<Pret>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Pret (dateDebut, dateFin, confirmation, idUser, idEx) VALUES (" + p.getDateDebut() + ", " + p.getDateFin() + ", " + p.getConf() + ", " + p.getExemplaire().getIdExemplaire() + ", " + p.getUser().getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Pret (dateDebut, dateFin, confirmation, idUser, idEx) VALUES (Date'" + p.getDateDebut() + "', Date'" + p.getDateFin() + "', '" + p.getConf() + "', " + p.getExemplaire().getIdExemplaire() + ", " + p.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class PretDAO extends DAO<Pret>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Pret SET dateDebut = " + p.getDateDebut() + ", dateFin = " + p.getDateFin() + ", confirmation = " + p.getConf() + ", idEx = " + p.getExemplaire().getIdExemplaire() + ", idUser = " + p.getUser().getIdUser() + " WHERE idPret = " + p.getIdPret() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Pret SET dateDebut = Date'" + p.getDateDebut() + "', dateFin = Date'" + p.getDateFin() + "', confirmation = '" + p.getConf() + "', idEx = " + p.getExemplaire().getIdExemplaire() + ", idUser = " + p.getUser().getIdUser() + " WHERE idPret = " + p.getIdPret() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

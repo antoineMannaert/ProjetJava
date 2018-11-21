@@ -15,7 +15,7 @@ public class UserDAO extends DAO<User> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (pseudo, mdp, solde, admin) VALUES (" + u.getPseudo() + ", " + u.getPassword() + ", " + u.getSolde() + ", " + u.getAdmin() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (pseudo, mdp, solde, admin) VALUES ('" + u.getPseudo() + "', '" + u.getPassword() + "', " + u.getSolde() + ", '" + u.getAdmin() + "');");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class UserDAO extends DAO<User> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE User SET pseudo = " + u.getPseudo() + ", mdp = " + u.getPassword() + ", solde = " + u.getSolde() + ", admin = " + u.getAdmin() + " WHERE idUser = " + u.getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE User SET pseudo = '" + u.getPseudo() + "', mdp = '" + u.getPassword() + "', solde = " + u.getSolde() + ", admin = '" + u.getAdmin() + "' WHERE idUser = " + u.getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

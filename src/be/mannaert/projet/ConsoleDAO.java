@@ -15,7 +15,7 @@ public class ConsoleDAO extends DAO<Console> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Console (nomConsole, diminutif) VALUES (" + c.getNom() + ", " + c.getDiminutif() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Console (nomConsole, diminutif) VALUES ('" + c.getNom() + "', '" + c.getDiminutif() + "');");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class ConsoleDAO extends DAO<Console> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Console SET nomConsole = " + c.getNom() + ", diminutif = " + c.getDiminutif() + " WHERE idConsole = " + c.getIdConsole() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Console SET nomConsole = '" + c.getNom() + "', diminutif = '" + c.getDiminutif() + "' WHERE idConsole = " + c.getIdConsole() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
