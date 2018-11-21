@@ -1,0 +1,88 @@
+package be.mannaert.projet;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class UserDAO extends DAO<User> {
+	
+	public UserDAO(Connection conn){
+		super(conn);
+	}
+	
+	public boolean create(User u){		
+		
+		try {
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (pseudo, mdp, solde, admin) VALUES (" + u.getPseudo() + ", " + u.getPassword() + ", " + u.getSolde() + ", " + u.getAdimin + ");");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean delete(User u){
+		
+		try {
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM User WHERE idUser = " + u.getIdUser() + ");");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean update(User u){
+
+		try {
+			this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE User SET pseudo = " + u.getPseudo() + ", mdp = " + u.getPassword() + ", solde = " + u.getSolde() + ", admin = " + u.getAdmin() + " WHERE idUser = " + u.getIdUser() + ");");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public User find(int id){
+		
+		User u = new User();
+		DAO<Exemplaire> edao = new ExemplaireDAO(ProjetConnection.getInstance());
+		DAO<Reservation> rdao = new ReservationDAO(ProjetConnection.getInstance());
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM User WHERE idUser = " + id);
+			if(result.first())
+				u = new User(id, result.getString("pseudo"), result.getString("mdp"), result.getInt("solde"), result.getBoolean("admin"));
+		
+			result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire where idUser = " + id + ";");
+			
+			while(result.next())
+				u.AjouterExemplaire(edao.find(result.getInt("idEx")));
+			
+			result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation where idUser = " + id + ";");
+			
+			while(result.next())
+				u.AjouterRes(rdao.find(result.getInt("idRes")));
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return u;
+	}
+}
