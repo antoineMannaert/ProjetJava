@@ -85,4 +85,38 @@ public class UserDAO extends DAO<User> {
 		}
 		return u;
 	}
+	
+	public User findByPseudo(String nom){
+		
+		User u = new User();
+		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
+		DAO<Reservation> rdao = new ReservationDAO(this.connect);
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM User WHERE pseudo = '" + nom + "';");
+			if(result.first())
+				u = new User(result.getInt("idUser"), nom, result.getString("mdp"), result.getInt("solde"), result.getBoolean("admin"));
+		
+			result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire where idUser = " + u.getIdUser() + ";");
+			
+			while(result.next())
+				u.AjouterExemplaire(edao.find(result.getInt("idEx")));
+			
+			result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation where idUser = " + u.getIdUser() + ";");
+			
+			while(result.next())
+				u.AjouterRes(rdao.find(result.getInt("idRes")));
+			
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return u;
+	}
 }
