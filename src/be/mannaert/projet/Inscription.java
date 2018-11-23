@@ -113,6 +113,13 @@ public class Inscription extends JFrame {
 		contentPane.add(btnInscrip);
 		
 		JButton btnCo = new JButton("D\u00E9j\u00E0 inscrit? Se connecter");
+		btnCo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login l = new Login();
+				l.setVisible(true);
+				dispose();
+			}
+		});
 		btnCo.setBounds(220, 160, 204, 52);
 		contentPane.add(btnCo);
 	}
