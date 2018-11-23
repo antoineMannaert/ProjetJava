@@ -58,7 +58,7 @@ public class Login extends JFrame {
 		contentPane.add(lblMDP);
 		
 		txtPseudo = new JTextField();
-		txtPseudo.setBounds(215, 65, 172, 42);
+		txtPseudo.setBounds(215, 65, 209, 42);
 		contentPane.add(txtPseudo);
 		txtPseudo.setColumns(10);
 		
@@ -78,9 +78,6 @@ public class Login extends JFrame {
 						
 						u = dao.findByPseudo(pseudo);
 						
-						System.out.println(password);
-						System.out.println(u.getPassword());
-						
 						if(u != null && password.equals(u.getPassword())) {
 							JOptionPane.showMessageDialog(null, "Bienvenue, " + u.getPseudo());
 						}
@@ -98,15 +95,24 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnCo.setBounds(10, 173, 172, 42);
+		btnCo.setBounds(10, 173, 199, 42);
 		contentPane.add(btnCo);
 		
-		JButton btnInscrip = new JButton("S'inscrire");
-		btnInscrip.setBounds(215, 173, 172, 42);
+		JButton btnInscrip = new JButton("Pas de compte? S'inscrire");
+		btnInscrip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Inscription i = new Inscription();
+				i.setVisible(true);
+				dispose();
+				
+			}
+		});
+		btnInscrip.setBounds(225, 173, 199, 42);
 		contentPane.add(btnInscrip);
 		
 		txtMDP = new JPasswordField();
-		txtMDP.setBounds(215, 116, 172, 42);
+		txtMDP.setBounds(215, 116, 209, 42);
 		contentPane.add(txtMDP);
 	}
 }
