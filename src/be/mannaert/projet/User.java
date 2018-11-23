@@ -20,6 +20,16 @@ public class User {
 	
 	public User() {}
 	
+	public User(String pseudo, String password, int solde, boolean admin) {
+		this.pseudo = pseudo;
+		this.password = password;
+		this.solde = solde;
+		this.admin = admin;
+		this.listeExemplaires = new HashSet<Exemplaire>();
+		this.listeRes = new HashSet<Reservation>();
+		this.listePrets = new HashSet<Pret>();
+	}
+	
 	public User(int idUser, String pseudo, String password, int solde, boolean admin) {
 		this.idUser = idUser;
 		this.pseudo = pseudo;
