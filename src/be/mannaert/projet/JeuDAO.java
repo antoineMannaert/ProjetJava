@@ -27,7 +27,7 @@ public class JeuDAO extends DAO<Jeu>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Jeu WHERE idJeu = " + j.getIdJeu() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Jeu WHERE idJeu = " + j.getIdJeu() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

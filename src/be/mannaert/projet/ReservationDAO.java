@@ -29,7 +29,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Reservation WHERE idReservation = " + r.getIdRes() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Reservation WHERE idReservation = " + r.getIdRes() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

@@ -29,7 +29,7 @@ public class ConsoleDAO extends DAO<Console> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Console WHERE idConsole = " + c.getIdConsole() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Console WHERE idConsole = " + c.getIdConsole() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

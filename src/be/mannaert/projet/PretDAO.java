@@ -29,7 +29,7 @@ public class PretDAO extends DAO<Pret>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Pret WHERE idPret = " + p.getIdPret() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Pret WHERE idPret = " + p.getIdPret() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
