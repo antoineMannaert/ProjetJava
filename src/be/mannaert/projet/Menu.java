@@ -78,6 +78,9 @@ public class Menu extends JFrame {
 		JButton btnChangerMDP = new JButton("Changer Mot de passe");
 		btnChangerMDP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ChangerMDP c = new ChangerMDP(u);
+				c.setVisible(true);
+				dispose();
 			}
 		});
 		btnChangerMDP.setBounds(54, 310, 150, 40);
