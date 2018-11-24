@@ -94,6 +94,9 @@ public class Inscription extends JFrame {
 						
 						if(dao.create(u)) {
 							JOptionPane.showMessageDialog(null, "Bienvenue, " + u.getPseudo());
+							Menu m = new Menu(u);
+							m.setVisible(true);
+							dispose();
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Inscription non valide");

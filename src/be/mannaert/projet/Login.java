@@ -80,6 +80,9 @@ public class Login extends JFrame {
 						
 						if(u != null && password.equals(u.getPassword())) {
 							JOptionPane.showMessageDialog(null, "Bienvenue, " + u.getPseudo());
+							Menu m = new Menu(u);
+							m.setVisible(true);
+							dispose();
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Veuillez utiliser un pseudo/mot de passe correct");
