@@ -29,7 +29,7 @@ public class UserDAO extends DAO<User> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE * FROM User WHERE idUser = " + u.getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM User WHERE idUser = " + u.getIdUser() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
