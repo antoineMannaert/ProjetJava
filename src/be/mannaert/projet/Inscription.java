@@ -90,7 +90,7 @@ public class Inscription extends JFrame {
 					
 					if(!pseudo.isEmpty() && !password.isEmpty() && !conf.isEmpty() && password.equals(conf)) {
 						
-						u = new User(pseudo, password, 50, false);
+						u = new User(pseudo, password, 10, false);
 						
 						if(dao.create(u)) {
 							JOptionPane.showMessageDialog(null, "Bienvenue, " + u.getPseudo());
