@@ -43,7 +43,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Exemplaire SET disponibilité = '" + ex.getDispo() + "', idJeu = " + ex.getJeu().getIdJeu() + ", idUser = " + ex.getUser().getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Exemplaire SET disponibilité = '" + ex.getDispo() + "', idJeu = " + ex.getJeu().getIdJeu() + ", idUser = " + ex.getUser().getIdUser() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

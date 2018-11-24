@@ -41,7 +41,7 @@ public class JeuDAO extends DAO<Jeu>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Jeu SET nomJeu = '" + j.getNom() + "', tarif = " + j.getTarif() + ", idConsole = " + j.getConsole().getIdConsole() + " WHERE idJeu = " + j.getIdJeu() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Jeu SET nomJeu = '" + j.getNom() + "', tarif = " + j.getTarif() + ", idConsole = " + j.getConsole().getIdConsole() + " WHERE idJeu = " + j.getIdJeu() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

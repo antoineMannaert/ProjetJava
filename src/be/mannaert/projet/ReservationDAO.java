@@ -43,7 +43,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Reservation SET dateRes = Date'" + r.getDateRes() + "', etat  = '" + r.getEtatRes() + "', idJeu = " + r.getJeu().getIdJeu() +  " WHERE idRes = " + r.getIdRes() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Reservation SET dateRes = Date'" + r.getDateRes() + "', etat  = '" + r.getEtatRes() + "', idJeu = " + r.getJeu().getIdJeu() +  " WHERE idRes = " + r.getIdRes() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
