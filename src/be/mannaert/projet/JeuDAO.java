@@ -81,7 +81,7 @@ public class JeuDAO extends DAO<Jeu>{
 		try {
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE nomJeu LIKE '" + s + "%';");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE nomJeu LIKE '" + s + "%' ORDER BY nomJeu;");
 			
 			while(result.next()) {
 				lJeu.addElement(new Jeu(result.getInt("idJeu"), result.getString("nomJeu"), result.getInt("tarif"), cdao.find(result.getInt("idConsole"))));
@@ -102,7 +102,7 @@ public class JeuDAO extends DAO<Jeu>{
 		try {
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu;");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu ORDER BY nomJeu;");
 			
 			while(result.next()) {
 				lJeu.addElement(new Jeu(result.getInt("idJeu"), result.getString("nomJeu"), result.getInt("tarif"), cdao.find(result.getInt("idConsole"))));
