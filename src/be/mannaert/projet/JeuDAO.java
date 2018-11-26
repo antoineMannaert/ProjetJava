@@ -72,6 +72,27 @@ public class JeuDAO extends DAO<Jeu>{
 		return j;
 	}
 	
+	public Jeu findByNom(String nom) {
+		
+		Jeu j = new Jeu();
+		Console c = new Console();
+		DAO<Console> cdao = new ConsoleDAO(this.connect);
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE nomJeu = " + nom);
+			if(result.first()) {
+				c = cdao.find(result.getInt("idConsole"));
+				j = new Jeu(result.getInt("idJeu"), nom, result.getInt("tarif"), c);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return j;
+	}
+	
 	public DefaultListModel<Jeu> findAll(String nom, String dim){
 		
 		DefaultListModel<Jeu> lJeu = new DefaultListModel<>();
