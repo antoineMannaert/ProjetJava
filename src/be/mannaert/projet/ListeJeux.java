@@ -18,6 +18,7 @@ public class ListeJeux extends JFrame {
 	private JPanel contentPane;
 	private JeuDAO jdao = new JeuDAO(ProjetConnection.getInstance());
 	private ConsoleDAO cdao = new ConsoleDAO(ProjetConnection.getInstance());
+	private ExemplaireDAO edao = new ExemplaireDAO(ProjetConnection.getInstance());
 	private JTextField txtNomJeu;
 	private String[] tab = new String[8];
 	private JList<Jeu> listJeux;
@@ -71,6 +72,8 @@ public class ListeJeux extends JFrame {
 				listJeux.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				contentPane.add(listJeux);
 				scrollPane.setViewportView(listJeux);
+				btnAddEx.setEnabled(true);
+				btnReser.setEnabled(true);
 			}
 		});
 		contentPane.add(btnRecherche);
@@ -80,10 +83,37 @@ public class ListeJeux extends JFrame {
 		contentPane.add(scrollPane);
 		
 		btnAddEx = new JButton("Ajouter un exemplaire");
+		btnAddEx.setEnabled(false);
+		btnAddEx.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Jeu j = listJeux.getSelectedValue();
+				Exemplaire ex;
+				
+				if(j != null) {
+					
+					ex = new Exemplaire(true, j, u);
+					if(edao.create(ex)) {
+						
+						JOptionPane.showMessageDialog(null, "Mise à jour de votre liste d'exemplaires effectuée");
+						Menu m = new Menu(u);
+						m.setVisible(true);
+						dispose();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Mise à jour de votre liste d'exemplaires non effectuée");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Veuillez choisir un jeu!");
+				}
+			}
+		});
 		btnAddEx.setBounds(10, 260, 177, 40);
 		contentPane.add(btnAddEx);
 		
 		btnReser = new JButton("Faire une r\u00E9servation");
+		btnReser.setEnabled(false);
 		btnReser.setBounds(198, 260, 177, 40);
 		contentPane.add(btnReser);
 		

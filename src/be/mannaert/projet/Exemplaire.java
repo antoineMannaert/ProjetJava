@@ -13,6 +13,13 @@ public class Exemplaire {
 	
 	public Exemplaire() { }
 	
+	public Exemplaire(boolean dispo, Jeu j, User u) {
+		this.idExemplaire = 0;
+		this.dispo = dispo;
+		this.j = j;
+		this.u = u;
+	}
+	
 	public Exemplaire(int idExemplaire, boolean dispo, Jeu j, User u) {
 		this.idExemplaire = idExemplaire;
 		this.dispo = dispo;
