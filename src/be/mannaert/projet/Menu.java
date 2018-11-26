@@ -45,7 +45,7 @@ public class Menu extends JFrame {
 		contentPane.add(btnDeco);
 		
 		JLabel labelSolde = new JLabel("Solde : " + u.getSolde());
-		labelSolde.setBounds(349, 11, 75, 20);
+		labelSolde.setBounds(449, 11, 75, 20);
 		contentPane.add(labelSolde);
 		
 		JButton btnSupp = new JButton("Supprimer compte");
@@ -83,7 +83,18 @@ public class Menu extends JFrame {
 				dispose();
 			}
 		});
-		btnChangerMDP.setBounds(54, 310, 150, 40);
+		btnChangerMDP.setBounds(10, 310, 194, 40);
 		contentPane.add(btnChangerMDP);
+		
+		JButton btnAfficherJeux = new JButton("Afficher la liste des jeux");
+		btnAfficherJeux.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListeJeux lJeux = new ListeJeux(u);
+				lJeux.setVisible(true);
+				dispose();
+			}
+		});
+		btnAfficherJeux.setBounds(10, 65, 194, 40);
+		contentPane.add(btnAfficherJeux);
 	}
 }
