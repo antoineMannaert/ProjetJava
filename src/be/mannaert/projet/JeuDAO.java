@@ -73,15 +73,43 @@ public class JeuDAO extends DAO<Jeu>{
 		return j;
 	}
 	
-	public ListModel<Jeu> findAll(String s){
+	public ListModel<Jeu> findAll(String nom, String dim){
 		
 		DefaultListModel<Jeu> lJeu = new DefaultListModel<Jeu>();
 		DAO <Console> cdao = new ConsoleDAO(this.connect);
 		
 		try {
+			ResultSet res = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console WHERE diminutif = '" + dim + "';");
+			
+			if(res.first()) {
+				
+				ResultSet result = this.connect.createStatement(
+						ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE nomJeu LIKE '" + nom + "%' AND idConsole = '"+ res.getInt("idConsole") + "' ORDER BY nomJeu;");
+				
+				while(result.next()) {
+					lJeu.addElement(new Jeu(result.getInt("idJeu"), result.getString("nomJeu"), result.getInt("tarif"), cdao.find(result.getInt("idConsole"))));
+				}
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lJeu;
+	}
+	
+public ListModel<Jeu> findAll(String nom){
+		
+		DefaultListModel<Jeu> lJeu = new DefaultListModel<Jeu>();
+		DAO <Console> cdao = new ConsoleDAO(this.connect);
+		
+		try {				
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE nomJeu LIKE '" + s + "%' ORDER BY nomJeu;");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Jeu WHERE nomJeu LIKE '" + nom + "%' ORDER BY nomJeu;");
 			
 			while(result.next()) {
 				lJeu.addElement(new Jeu(result.getInt("idJeu"), result.getString("nomJeu"), result.getInt("tarif"), cdao.find(result.getInt("idConsole"))));
