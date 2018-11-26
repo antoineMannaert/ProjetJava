@@ -69,5 +69,23 @@ public class ConsoleDAO extends DAO<Console> {
 		}
 		return c;
 	}
-
+	
+	public String[] getDiminutifs() {
+		
+		String[] tab = new String[8];
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT diminutif FROM Console;");
+			for(int i = 0; result.next(); i++) {
+				tab[i] = result.getString("diminutif");
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return tab;
+	}
 }
