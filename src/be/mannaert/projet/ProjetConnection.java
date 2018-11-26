@@ -11,7 +11,7 @@ public class ProjetConnection {
 		
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			String url = "jdbc:ucanaccess://./database.accdb";
+			String url = "jdbc:ucanaccess://D:\\Users\\Antoine\\eclipse-workspace\\Projet\\database.accdb";
 			instance = DriverManager.getConnection(url);
 		}
 		catch(ClassNotFoundException e) {
