@@ -2,7 +2,6 @@ package be.mannaert.projet;
 
 import java.sql.*;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 public class JeuDAO extends DAO<Jeu>{
 
@@ -73,9 +72,9 @@ public class JeuDAO extends DAO<Jeu>{
 		return j;
 	}
 	
-	public ListModel<Jeu> findAll(String nom, String dim){
+	public DefaultListModel<Jeu> findAll(String nom, String dim){
 		
-		DefaultListModel<Jeu> lJeu = new DefaultListModel<Jeu>();
+		DefaultListModel<Jeu> lJeu = new DefaultListModel<>();
 		DAO <Console> cdao = new ConsoleDAO(this.connect);
 		
 		try {
@@ -101,9 +100,9 @@ public class JeuDAO extends DAO<Jeu>{
 		return lJeu;
 	}
 	
-public ListModel<Jeu> findAll(String nom){
+	public DefaultListModel<Jeu> findAll(String nom){
 		
-		DefaultListModel<Jeu> lJeu = new DefaultListModel<Jeu>();
+		DefaultListModel<Jeu> lJeu = new DefaultListModel<>();
 		DAO <Console> cdao = new ConsoleDAO(this.connect);
 		
 		try {				
@@ -122,9 +121,9 @@ public ListModel<Jeu> findAll(String nom){
 		return lJeu;
 	}
 	
-	public ListModel<Jeu> findAll(){
+	public DefaultListModel<Jeu> findAll(){
 		
-		DefaultListModel<Jeu> lJeu = new DefaultListModel<Jeu>();
+		DefaultListModel<Jeu> lJeu = new DefaultListModel<>();
 		DAO <Console> cdao = new ConsoleDAO(this.connect);
 		
 		try {

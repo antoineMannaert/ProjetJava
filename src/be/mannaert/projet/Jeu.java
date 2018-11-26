@@ -56,6 +56,6 @@ public class Jeu {
 	
 	@Override
 	public String toString() {
-		return this.getNom();
+		return this.getNom() + " au tarif de " + this.getTarif() + "unité(s)";
 	}
 }
