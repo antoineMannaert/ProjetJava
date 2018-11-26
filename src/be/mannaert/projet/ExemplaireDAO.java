@@ -15,7 +15,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Exemplaire (disponible, idJeu, idUser) SET ('" + ex.getDispo() + "', " + ex.getJeu().getIdJeu() + ", " + ex.getUser().getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Exemplaire (disponible, idJeu, idUser) VALUES ('" + ex.getDispo() + "', " + ex.getJeu().getIdJeu() + ", " + ex.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
