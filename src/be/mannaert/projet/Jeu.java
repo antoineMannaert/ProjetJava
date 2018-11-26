@@ -51,4 +51,11 @@ public class Jeu {
 	public void setConsole(Console c) {
 		this.c = c;
 	}
+	
+	//Surcharge de la méthode toString()
+	
+	@Override
+	public String toString() {
+		return this.getNom();
+	}
 }
