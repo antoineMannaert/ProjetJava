@@ -63,6 +63,12 @@ public class Exemplaire {
 	
 	@Override
 	public String toString() {
-		return this.j.getNom() + " est " + this.dispo;
+		
+		if(this.dispo) {
+			return this.j.getNom() + " n'est pas prêté.";
+		}
+		else {
+			return this.j.getNom() + "est prêté";
+		}
 	}
 }
