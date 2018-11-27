@@ -64,6 +64,18 @@ public class User {
 		return this.admin;
 	}
 	
+	public Set<Exemplaire> getListeEx(){
+		return this.listeExemplaires;
+	}
+	
+	public Set<Reservation> getListeRes(){
+		return this.listeRes;
+	}
+	
+	public Set<Pret> getListePrets(){
+		return this.listePrets;
+	}
+	
 	//Setters
 	
 	public void setPseudo(String pseudo) {
