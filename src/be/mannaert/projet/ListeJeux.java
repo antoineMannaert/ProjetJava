@@ -16,6 +16,7 @@ public class ListeJeux extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private UserDAO udao = new UserDAO(ProjetConnection.getInstance());
 	private JeuDAO jdao = new JeuDAO(ProjetConnection.getInstance());
 	private ConsoleDAO cdao = new ConsoleDAO(ProjetConnection.getInstance());
 	private ExemplaireDAO edao = new ExemplaireDAO(ProjetConnection.getInstance());
@@ -96,7 +97,7 @@ public class ListeJeux extends JFrame {
 					if(edao.create(ex)) {
 						
 						JOptionPane.showMessageDialog(null, "Mise à jour de votre liste d'exemplaires effectuée");
-						Menu m = new Menu(u);
+						Menu m = new Menu(udao.find(u.getIdUser()));
 						m.setVisible(true);
 						dispose();
 					}
