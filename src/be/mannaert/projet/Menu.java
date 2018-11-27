@@ -94,7 +94,18 @@ public class Menu extends JFrame {
 				dispose();
 			}
 		});
-		btnAfficherJeux.setBounds(10, 65, 194, 40);
+		btnAfficherJeux.setBounds(10, 65, 230, 40);
 		contentPane.add(btnAfficherJeux);
+		
+		JButton btnListEx = new JButton("Afficher ma liste d'exemplaires");
+		btnListEx.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListeExemplaires l = new ListeExemplaires(u);
+				l.setVisible(true);
+				dispose();
+			}
+		});
+		btnListEx.setBounds(10, 116, 230, 40);
+		contentPane.add(btnListEx);
 	}
 }
