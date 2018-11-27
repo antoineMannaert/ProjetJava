@@ -55,7 +55,7 @@ public class UserDAO extends DAO<User> {
 	public User find(int id){
 		
 		User u = new User();
-		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
+		DAO<Jeu> jdao = new JeuDAO(this.connect);
 		DAO<Reservation> rdao = new ReservationDAO(this.connect);
 		
 		try{
@@ -70,7 +70,7 @@ public class UserDAO extends DAO<User> {
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire where idUser = " + id + ";");
 			
 			while(result.next())
-				u.AjouterExemplaire(edao.find(result.getInt("idEx")));
+				u.AjouterExemplaire(new Exemplaire(result.getInt("idEx"), result.getBoolean("disponible"), jdao.find(result.getInt("idJeu")), u));
 			
 			result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -89,8 +89,8 @@ public class UserDAO extends DAO<User> {
 	public User findByPseudo(String nom){
 		
 		User u = new User();
-		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
 		DAO<Reservation> rdao = new ReservationDAO(this.connect);
+		DAO<Jeu> jdao = new JeuDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(
@@ -104,7 +104,8 @@ public class UserDAO extends DAO<User> {
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire where idUser = " + u.getIdUser() + ";");
 			
 			while(result.next())
-				u.AjouterExemplaire(edao.find(result.getInt("idEx")));
+				
+				u.AjouterExemplaire(new Exemplaire(result.getInt("idEx"), result.getBoolean("disponible"), jdao.find(result.getInt("idJeu")), u));
 			
 			result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
