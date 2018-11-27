@@ -29,7 +29,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Exemplaire WHERE idExemplaire = " + ex.getIdExemplaire() + ";");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Exemplaire WHERE idEx = " + ex.getIdExemplaire() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -64,7 +64,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM ExemplaireJeu WHERE idExemplaire = " + id + ");");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire WHERE idEx = " + id + ");");
 			
 			if(result.first()) {
 				
