@@ -64,7 +64,7 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire WHERE idEx = " + id + ");");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire WHERE idEx = " + id + ";");
 			
 			if(result.first()) {
 				
