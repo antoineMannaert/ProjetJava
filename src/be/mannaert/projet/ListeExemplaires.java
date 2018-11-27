@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class ListeExemplaires extends JFrame {
 
@@ -23,6 +24,7 @@ public class ListeExemplaires extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private ExemplaireDAO edao = new ExemplaireDAO(ProjetConnection.getInstance());
+	private UserDAO udao = new UserDAO(ProjetConnection.getInstance());
 
 	/**
 	 * Create the frame.
@@ -58,6 +60,35 @@ public class ListeExemplaires extends JFrame {
 		contentPane.add(btnMenu);
 		
 		JButton btnSupp = new JButton("Supprimer l'exemplaire");
+		btnSupp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Exemplaire ex = list.getSelectedValue();
+				
+				if(ex != null) {
+
+					try {
+						
+						if(edao.delete(ex)) {
+							JOptionPane.showMessageDialog(null, "Suppression effectuée");
+							Menu m = new Menu(udao.find(u.getIdUser()));
+							m.setVisible(true);
+							dispose();
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Suppression non valide");
+						}
+					}
+							
+					catch(Exception err) {
+						System.out.println(err);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Choisissez un jeu à supprimer.");
+				}
+			}
+		});
 		btnSupp.setBounds(10, 220, 204, 30);
 		contentPane.add(btnSupp);
 	}
