@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.DefaultListModel;
+
 public class ExemplaireDAO extends DAO<Exemplaire>{
 	
 	public ExemplaireDAO(Connection conn) {
@@ -80,4 +82,25 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		return ex;
 	}
 
+	public DefaultListModel<Exemplaire> findAll(int idUser){
+		
+		DefaultListModel<Exemplaire> lEx = new DefaultListModel<>();
+		DAO<Jeu> jdao = new JeuDAO(this.connect);
+		DAO<User> udao = new UserDAO(this.connect);
+		
+		try {				
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire WHERE idUser = " + idUser + ";");
+			
+			while(result.next()) {
+				lEx.addElement(new Exemplaire(result.getInt("idEx"), result.getBoolean("disponible"), jdao.find(result.getInt("idJeu")), udao.find(idUser)));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lEx;
+	}
 }
