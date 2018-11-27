@@ -58,4 +58,11 @@ public class Exemplaire {
 	public void setUser(User u) {
 		this.u = u;
 	}
+	
+	//Surcharge du toString()
+	
+	@Override
+	public String toString() {
+		return this.j.getNom() + " est " + this.dispo;
+	}
 }
