@@ -15,7 +15,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Reservation (etat, idJeu) VALUES ('" + r.getEtatRes() + "', " + r.getJeu().getIdJeu() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Reservation (etat, idJeu, idUser) VALUES ('" + r.getEtatRes() + "', " + r.getJeu().getIdJeu() + ", " + r.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Reservation SET dateRes = Date'" + r.getDateRes() + "', etat  = '" + r.getEtatRes() + "', idJeu = " + r.getJeu().getIdJeu() +  " WHERE idRes = " + r.getIdRes() + ";");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Reservation SET dateRes = Date'" + r.getDateRes() + "', etat  = '" + r.getEtatRes() + "', idJeu = " + r.getJeu().getIdJeu() + ", idUser = " + r.getUser().getIdUser() + " WHERE idRes = " + r.getIdRes() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -56,7 +56,9 @@ public class ReservationDAO extends DAO<Reservation> {
 		
 		Reservation r = new Reservation();
 		Jeu j = new Jeu();
+		User u = new User();
 		DAO<Jeu> jdao = new JeuDAO(this.connect);
+		DAO<User> udao = new UserDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(
@@ -64,7 +66,8 @@ public class ReservationDAO extends DAO<Reservation> {
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idRes = " + id);
 			if(result.first()) {
 				j = jdao.find(result.getInt("idJeu"));
-				r = new Reservation(id, result.getDate("dateRes"), result.getString("etat"), j);
+				u = udao.find(result.getInt("idUser"));
+				r = new Reservation(id, result.getDate("dateRes"), result.getString("etat"), j, u);
 			}
 		}
 		catch(SQLException e){

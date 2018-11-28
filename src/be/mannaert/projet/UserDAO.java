@@ -56,7 +56,6 @@ public class UserDAO extends DAO<User> {
 		
 		User u = new User();
 		DAO<Jeu> jdao = new JeuDAO(this.connect);
-		DAO<Reservation> rdao = new ReservationDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(
@@ -77,7 +76,7 @@ public class UserDAO extends DAO<User> {
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation where idUser = " + id + ";");
 			
 			while(result.next())
-				u.AjouterRes(rdao.find(result.getInt("idRes")));
+				u.AjouterRes(new Reservation(result.getInt("idRes"), result.getDate("dateRes"), result.getString("etat"), jdao.find(result.getInt("idJeu")), u));
 			
 		}
 		catch(SQLException e){
