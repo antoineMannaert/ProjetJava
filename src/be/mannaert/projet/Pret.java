@@ -63,4 +63,11 @@ public class Pret {
 	public void setUser(User u) {
 		this.u = u;
 	}
+	
+	//Surcharge du toString()
+	
+	@Override
+	public String toString() {
+		return "Votre emprunt de " + this.ex.getJeu().getNom() + "a commencé le " + this.dateDebut;
+	}
 }

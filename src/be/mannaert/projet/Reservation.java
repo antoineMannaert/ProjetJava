@@ -63,4 +63,11 @@ public class Reservation {
 	public void setUser(User u) {
 		this.u = u;
 	}
+	
+	//Surcharge du toString()
+	
+	@Override
+	public String toString() {
+		return "Votre réservation pour " + this.j.getNom() + " est active depuis le " + this.dateRes;
+	}
 }
