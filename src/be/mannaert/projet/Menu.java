@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class Menu extends JFrame {
 
@@ -113,13 +114,45 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				ListRes l = new ListRes(u);
+				l.setVisible(true);
+				dispose();
 			}
 		});
 		btnVoirRes.setBounds(10, 167, 230, 40);
 		contentPane.add(btnVoirRes);
 		
 		JButton btnListPret = new JButton("Afficher ma liste d'emprunts");
+		btnListPret.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ListePret l = new ListePret(u);
+				l.setVisible(true);
+				dispose();
+			}
+		});
 		btnListPret.setBounds(10, 218, 230, 40);
 		contentPane.add(btnListPret);
+		
+		JLabel lblListJeux = new JLabel("Voyez quels jeux sont disponibles sur la plateforme \r\net ajoutez vos exemplaires");
+		lblListJeux.setVerticalAlignment(SwingConstants.TOP);
+		lblListJeux.setBounds(250, 65, 274, 40);
+		contentPane.add(lblListJeux);
+		
+		JLabel lblListEx = new JLabel("Afficher vos exemplaires et supprimer ceux \r\nque vous ne mettez plus \u00E0 disposition");
+		lblListEx.setVerticalAlignment(SwingConstants.TOP);
+		lblListEx.setBounds(250, 116, 274, 40);
+		contentPane.add(lblListEx);
+		
+		JLabel lblNewLabel = new JLabel("Afficher vos r\u00E9servation \r\net annulez si besoin");
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setBounds(250, 167, 274, 40);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnAdmin = new JButton("Fonctions Admin");
+		btnAdmin.setBounds(10, 269, 230, 30);
+		if(!u.getAdmin()) {
+			btnAdmin.setVisible(false);
+		}
+		contentPane.add(btnAdmin);
 	}
 }
