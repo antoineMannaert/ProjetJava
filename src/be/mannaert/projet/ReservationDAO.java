@@ -96,6 +96,24 @@ public class ReservationDAO extends DAO<Reservation> {
 		return false;
 	}
 	
+	public boolean findByIdJeu(int idJeu){
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idJeu = " + idJeu + " AND etat = 'en cours';");
+			
+			if(result.first()) {
+				return true;
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	public DefaultListModel<Reservation> findAll(int idUser) {
 		
 		DefaultListModel<Reservation> lRes = new DefaultListModel<>();
