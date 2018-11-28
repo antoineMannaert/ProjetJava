@@ -81,7 +81,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try{
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idJeu = " + idJeu + " AND idUser = " + idUser);
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idJeu = " + idJeu + " AND idUser = " + idUser + " AND etat = 'en cours';");
 			
 			if(result.first()) {
 				return true;
