@@ -56,7 +56,7 @@ public class PretDAO extends DAO<Pret>{
 	
 	public Pret find(int id){
 		
-		Pret p = new Pret();
+		Pret p = null;
 		Exemplaire ex = new Exemplaire();
 		User u = new User();
 		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
@@ -81,7 +81,7 @@ public class PretDAO extends DAO<Pret>{
 	
 	public Pret find(int idUser, int idEx){
 		
-		Pret p = new Pret();
+		Pret p = null;
 		Exemplaire ex = new Exemplaire();
 		User u = new User();
 		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
@@ -90,7 +90,7 @@ public class PretDAO extends DAO<Pret>{
 		try{
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Pret WHERE idUser = " + idUser + " AND idEx = " + idEx + " AND dateFin = null;");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Pret WHERE idUser = " + idUser + " AND idEx = " + idEx + ";");
 			if(result.first()) {
 				
 				ex = edao.find(result.getInt(idEx));
