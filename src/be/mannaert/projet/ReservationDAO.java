@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.DefaultListModel;
+
 public class ReservationDAO extends DAO<Reservation> {
 	
 	public ReservationDAO(Connection conn) {
@@ -92,6 +94,28 @@ public class ReservationDAO extends DAO<Reservation> {
 		}
 		
 		return false;
+	}
+	
+	public DefaultListModel<Reservation> findAll(int idJeu, int idUser) {
+		
+		DefaultListModel<Reservation> lRes = new DefaultListModel<>();
+		DAO<Jeu> jdao = new JeuDAO(this.connect);
+		DAO<User> udao = new UserDAO(this.connect);
+		
+		try {				
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idJeu = " + idJeu + " AND idUser = " + idUser + ";");
+			
+			while(result.next()) {
+				lRes.addElement(new Reservation(result.getInt("idRes"), result.getDate("dateRes"), result.getString("etat"), jdao.find(idJeu), udao.find(idUser)));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lRes;
 	}
 
 }
