@@ -14,7 +14,6 @@ public class User {
 	
 	private Set<Exemplaire> listeExemplaires;
 	private Set<Reservation> listeRes;
-	private Set<Pret> listePrets;
 
 	//Constructeurs
 	
@@ -27,7 +26,6 @@ public class User {
 		this.admin = admin;
 		this.listeExemplaires = new HashSet<Exemplaire>();
 		this.listeRes = new HashSet<Reservation>();
-		this.listePrets = new HashSet<Pret>();
 	}
 	
 	public User(int idUser, String pseudo, String password, int solde, boolean admin) {
@@ -38,7 +36,6 @@ public class User {
 		this.admin = admin;
 		this.listeExemplaires = new HashSet<Exemplaire>();
 		this.listeRes = new HashSet<Reservation>();
-		this.listePrets = new HashSet<Pret>();
 		
 	}
 	
@@ -72,10 +69,6 @@ public class User {
 		return this.listeRes;
 	}
 	
-	public Set<Pret> getListePrets(){
-		return this.listePrets;
-	}
-	
 	//Setters
 	
 	public void setPseudo(String pseudo) {
@@ -102,10 +95,6 @@ public class User {
 	
 	public void AjouterRes(Reservation res) {
 		this.listeRes.add(res);
-	}
-	
-	public void AjouterPret(Pret p) {
-		this.listePrets.add(p);
 	}
 	
 	//Méthodes de suppression dans la liste des exemplaires
