@@ -104,12 +104,12 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		return lEx;
 	}
 	
-	public boolean findDispo() {
+	public boolean findDispo(int id) {
 		
 		try {				
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire WHERE disponible = true;");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire WHERE idJeu = " + id + " AND disponible = true;");
 			
 			if(result.first()) {
 				return true;
