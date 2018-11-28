@@ -103,4 +103,22 @@ public class ExemplaireDAO extends DAO<Exemplaire>{
 		
 		return lEx;
 	}
+	
+	public boolean findDispo() {
+		
+		try {				
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Exemplaire WHERE disponible = true;");
+			
+			if(result.first()) {
+				return true;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 }
