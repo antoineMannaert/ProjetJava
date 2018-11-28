@@ -40,7 +40,7 @@ public class ListeExemplaires extends JFrame {
 		scrollPane.setBounds(10, 52, 414, 150);
 		contentPane.add(scrollPane);
 		
-		JList<Exemplaire> list = new JList<>(edao.findAll(u.getIdUser()));
+		JList<Exemplaire> list = new JList<>(edao.findAll(u.getIdUser(), "idUser"));
 		scrollPane.setViewportView(list);
 		
 		JButton btnMenu = new JButton("Retour");
