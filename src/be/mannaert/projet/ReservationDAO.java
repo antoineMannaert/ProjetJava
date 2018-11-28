@@ -96,7 +96,13 @@ public class ReservationDAO extends DAO<Reservation> {
 		return false;
 	}
 	
-	public boolean findByIdJeu(int idJeu){
+	public Reservation findByIdJeu(int idJeu){
+		
+		Reservation res = new Reservation();
+		Jeu j = new Jeu();
+		User u = new User();
+		DAO<Jeu> jdao = new JeuDAO(this.connect);
+		DAO<User> udao = new UserDAO(this.connect);
 		
 		try{
 			ResultSet result = this.connect.createStatement(
@@ -104,14 +110,17 @@ public class ReservationDAO extends DAO<Reservation> {
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idJeu = " + idJeu + " AND etat = 'en cours';");
 			
 			if(result.first()) {
-				return true;
+				
+				j = jdao.find(idJeu);
+				u = udao.find(result.getInt("idUser"));
+				res = new Reservation(result.getInt("idRes"), result.getDate("dateRes"), result.getString("etat"), j, u);
 			}
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 		}
 		
-		return false;
+		return res;
 	}
 	
 	public DefaultListModel<Reservation> findAll(int idUser) {
