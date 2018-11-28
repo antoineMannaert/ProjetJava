@@ -107,5 +107,19 @@ public class Menu extends JFrame {
 		});
 		btnListEx.setBounds(10, 116, 230, 40);
 		contentPane.add(btnListEx);
+		
+		JButton btnVoirRes = new JButton("Afficher ma liste de r\u00E9servations");
+		btnVoirRes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ListRes l = new ListRes(u);
+			}
+		});
+		btnVoirRes.setBounds(10, 167, 230, 40);
+		contentPane.add(btnVoirRes);
+		
+		JButton btnListPret = new JButton("Afficher ma liste d'emprunts");
+		btnListPret.setBounds(10, 218, 230, 40);
+		contentPane.add(btnListPret);
 	}
 }
