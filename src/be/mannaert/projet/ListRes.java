@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -50,8 +51,42 @@ public class ListRes extends JFrame {
 				dispose();
 			}
 		});
-		btnRetour.setBounds(140, 215, 151, 35);
+		btnRetour.setBounds(223, 215, 201, 35);
 		contentPane.add(btnRetour);
+		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Reservation r = listRes.getSelectedValue();
+				
+				if(r != null) {
+
+					try {
+						
+						r.setEtatRes("annule");
+						if(rdao.update(r)) {
+							JOptionPane.showMessageDialog(null, "Annulation effectuée");
+							Menu m = new Menu(u);
+							m.setVisible(true);
+							dispose();
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Annulation non valide");
+						}
+					}
+							
+					catch(Exception err) {
+						System.out.println(err);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Choisissez une réservation à annuler.");
+				}
+			}
+		});
+		btnAnnuler.setBounds(10, 215, 203, 35);
+		contentPane.add(btnAnnuler);
 	}
 
 }
