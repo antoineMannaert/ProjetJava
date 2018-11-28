@@ -52,12 +52,14 @@ public class ListePret extends JFrame {
 			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				
-				Pret p = list.getSelectedValue();
-				Exemplaire ex = p.getExemplaire();
+				Pret p;
+				Exemplaire ex;
 				Reservation res;
 				
-				if(p != null) {
+				if(!list.isSelectionEmpty()) {
 					
+					p = list.getSelectedValue();
+					ex = p.getExemplaire();
 					try {
 						
 						if(p.getDateFin() != null) {

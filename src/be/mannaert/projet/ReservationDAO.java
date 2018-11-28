@@ -132,7 +132,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {				
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idUser = " + idUser + ";");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idUser = " + idUser + " AND etat = 'en cours';");
 			
 			while(result.next()) {
 				lRes.addElement(new Reservation(result.getInt("idRes"), result.getDate("dateRes"), result.getString("etat"), jdao.find(result.getInt("idJeu")), udao.find(idUser)));
