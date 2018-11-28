@@ -49,7 +49,6 @@ public class ListePret extends JFrame {
 		
 		JButton btnTerminer = new JButton("Terminer l'emprunt");
 		btnTerminer.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				
 				Pret p;
