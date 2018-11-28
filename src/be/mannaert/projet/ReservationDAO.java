@@ -76,4 +76,22 @@ public class ReservationDAO extends DAO<Reservation> {
 		return r;
 	}
 
+	public boolean find(int idJeu, int idUser){
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Reservation WHERE idJeu = " + idJeu + " AND idUser = " + idUser);
+			
+			if(result.first()) {
+				return true;
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
 }
