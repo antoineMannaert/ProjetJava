@@ -1,6 +1,6 @@
 package be.mannaert.projet;
 
-import java.util.*;
+import java.sql.*;
 
 public class Pret {
 
@@ -9,7 +9,6 @@ public class Pret {
 	private int idPret;
 	private Date dateDebut;
 	private Date dateFin;
-	private boolean conf;
 	private Exemplaire ex;
 	private User u;
 	
@@ -17,11 +16,10 @@ public class Pret {
 	
 	public Pret() {	}
 	
-	public Pret(int idPret, Date dateDebut, Date dateFin, boolean conf, Exemplaire ex, User u) {
+	public Pret(int idPret, Date dateDebut, Date dateFin, Exemplaire ex, User u) {
 		this.idPret = idPret;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.conf = conf;
 		this.ex = ex;
 		this.u = u;
 	}
@@ -39,11 +37,7 @@ public class Pret {
 	public Date getDateFin() {
 		return this.dateFin;
 	}
-	
-	public boolean getConf() {
-		return this.conf;
-	}
-	
+		
 	public Exemplaire getExemplaire() {
 		return this.ex;
 	}
@@ -60,10 +54,6 @@ public class Pret {
 	
 	public void setDateFin(Date dateFin) {
 		this.dateFin = dateFin;
-	}
-	
-	public void setConf(boolean conf) {
-		this.conf = conf;
 	}
 	
 	public void setExemplaire(Exemplaire ex) {

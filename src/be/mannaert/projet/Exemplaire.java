@@ -65,7 +65,7 @@ public class Exemplaire {
 	public String toString() {
 
 		if(this.dispo) {
-			return this.j.getNom() + ", disponible par " + this.u.getPseudo() + ".";
+			return this.j.getNom() + " est disponible.";
 		}
 		else {
 			return this.j.getNom() + " est prêté.";
