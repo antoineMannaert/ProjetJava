@@ -79,6 +79,31 @@ public class PretDAO extends DAO<Pret>{
 		return p;
 	}
 	
+	public Pret find(int idUser, int idEx){
+		
+		Pret p = new Pret();
+		Exemplaire ex = new Exemplaire();
+		User u = new User();
+		DAO<Exemplaire> edao = new ExemplaireDAO(this.connect);
+		DAO<User> udao = new UserDAO(this.connect);
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Pret WHERE idUser = " + idUser + " AND idEx = " + idEx + " AND dateFin = null;");
+			if(result.first()) {
+				
+				ex = edao.find(result.getInt(idEx));
+				u = udao.find(result.getInt(idUser));
+				p = new Pret(result.getInt("idPret"), result.getDate("dateDebut"), result.getDate("dateFin"), ex, u);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return p;
+	}
+	
 	public DefaultListModel<Pret> findAll(int idUser){
 		
 		DefaultListModel<Pret> lPr = new DefaultListModel<>();
