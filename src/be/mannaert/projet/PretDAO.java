@@ -17,7 +17,7 @@ public class PretDAO extends DAO<Pret>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Pret (dateFin, idUser, idEx) VALUES (Date'" + p.getDateFin() + "', " + p.getExemplaire().getIdExemplaire() + ", " + p.getUser().getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Pret (fin, idUser, idEx) VALUES ('" + p.getFin() + "', " + p.getExemplaire().getIdExemplaire() + ", " + p.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -45,7 +45,7 @@ public class PretDAO extends DAO<Pret>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Pret SET dateDebut = Date'" + p.getDateDebut() + "', dateFin = Date'" + p.getDateFin() + "', idEx = " + p.getExemplaire().getIdExemplaire() + ", idUser = " + p.getUser().getIdUser() + " WHERE idPret = " + p.getIdPret() + ";");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Pret SET fin = '" + p.getFin() + "', idEx = " + p.getExemplaire().getIdExemplaire() + ", idUser = " + p.getUser().getIdUser() + " WHERE idPret = " + p.getIdPret() + ";");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class PretDAO extends DAO<Pret>{
 				
 				ex = edao.find(result.getInt("idEx"));
 				u = udao.find(result.getInt("idUser"));
-				p = new Pret(id, result.getDate("dateDebut"), result.getDate("dateFin"), ex, u);
+				p = new Pret(id, result.getDate("dateDebut"), result.getBoolean("fin"), ex, u);
 			}
 		}
 		catch(SQLException e){
@@ -95,7 +95,7 @@ public class PretDAO extends DAO<Pret>{
 				
 				ex = edao.find(result.getInt(idEx));
 				u = udao.find(result.getInt(idUser));
-				p = new Pret(result.getInt("idPret"), result.getDate("dateDebut"), result.getDate("dateFin"), ex, u);
+				p = new Pret(result.getInt("idPret"), result.getDate("dateDebut"), result.getBoolean("fin"), ex, u);
 			}
 		}
 		catch(SQLException e){
@@ -116,7 +116,7 @@ public class PretDAO extends DAO<Pret>{
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Pret WHERE idUser = " + idUser + ";");
 			
 			while(result.next()) {
-				lPr.addElement(new Pret(result.getInt("idPret"), result.getDate("dateDebut"), result.getDate("dateFin"), edao.find(result.getInt("idEx")), udao.find(idUser)));
+				lPr.addElement(new Pret(result.getInt("idPret"), result.getDate("dateDebut"), result.getBoolean("fin"), edao.find(result.getInt("idEx")), udao.find(idUser)));
 			}
 		}
 		catch(SQLException e) {

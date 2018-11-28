@@ -51,30 +51,36 @@ public class ChoixPret extends JFrame {
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(listEx.getSelectedValue() != null) {
+				if(!listEx.isSelectionEmpty()) {
 					
-					Pret p = new Pret(0, new Date(0), null, listEx.getSelectedValue(), u);
+					Pret p = new Pret(0, new Date(0), false, listEx.getSelectedValue(), u);
 					
-					if(pdao.find(p.getIdPret()) != null && pdao.find(p.getIdPret()).getDateFin() == null) {
+					try {
 						
-						JOptionPane.showMessageDialog(null, "Vous avez déjà cet exemplaire en prêt."); //cas normalement impossible mais prudence est mère de sureté
-					}
-					else {
-						if(pdao.create(p)) {
-
-							JOptionPane.showMessageDialog(null, "Votre prêt a été effectué, votre solde est diminué de " + j.getTarif() + " unité(s).");
-							u.setSolde(u.getSolde() - j.getTarif());
-							listEx.getSelectedValue().getUser().setSolde(listEx.getSelectedValue().getUser().getSolde() + j.getTarif());
-							udao.update(u);
-							udao.update(listEx.getSelectedValue().getUser());
-							newUser = udao.find(u.getIdUser());
-							Menu m = new Menu(newUser);
-							m.setVisible(true);
-							dispose();
+						if(pdao.find(u.getIdUser(), p.getExemplaire().getIdExemplaire()) != null && pdao.find(p.getIdPret()).getFin()) {
+							
+							JOptionPane.showMessageDialog(null, "Vous avez déjà cet exemplaire en prêt."); //cas normalement impossible mais prudence est mère de sureté
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "Votre prêt n'a pas été effectué, désolé pour ce bug");
+							if(pdao.create(p)) {
+
+								JOptionPane.showMessageDialog(null, "Votre prêt a été effectué, votre solde est diminué de " + j.getTarif() + " unité(s).");
+								u.setSolde(u.getSolde() - j.getTarif());
+								listEx.getSelectedValue().getUser().setSolde(listEx.getSelectedValue().getUser().getSolde() + j.getTarif());
+								udao.update(u);
+								udao.update(listEx.getSelectedValue().getUser());
+								newUser = udao.find(u.getIdUser());
+								Menu m = new Menu(newUser);
+								m.setVisible(true);
+								dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Votre prêt n'a pas été effectué, désolé pour ce bug");
+							}
 						}
+					}
+					catch(Exception err) {
+						System.out.println(err.getMessage());
 					}
 				}
 				else {

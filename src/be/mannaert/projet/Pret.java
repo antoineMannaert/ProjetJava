@@ -8,7 +8,7 @@ public class Pret {
 	
 	private int idPret;
 	private Date dateDebut;
-	private Date dateFin;
+	private boolean fin;
 	private Exemplaire ex;
 	private User u;
 	
@@ -16,10 +16,10 @@ public class Pret {
 	
 	public Pret() {	}
 	
-	public Pret(int idPret, Date dateDebut, Date dateFin, Exemplaire ex, User u) {
+	public Pret(int idPret, Date dateDebut, boolean fin, Exemplaire ex, User u) {
 		this.idPret = idPret;
 		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
+		this.fin = fin;
 		this.ex = ex;
 		this.u = u;
 	}
@@ -34,8 +34,8 @@ public class Pret {
 		return this.dateDebut;
 	}
 	
-	public Date getDateFin() {
-		return this.dateFin;
+	public Boolean getFin() {
+		return this.fin;
 	}
 		
 	public Exemplaire getExemplaire() {
@@ -52,8 +52,8 @@ public class Pret {
 		this.dateDebut = dateDebut;
 	}
 	
-	public void setDateFin(Date dateFin) {
-		this.dateFin = dateFin;
+	public void setFin(boolean fin) {
+		this.fin = fin;
 	}
 	
 	public void setExemplaire(Exemplaire ex) {
