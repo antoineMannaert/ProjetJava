@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.Choice;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -20,6 +21,7 @@ public class ListeJeux extends JFrame {
 	private JeuDAO jdao = new JeuDAO(ProjetConnection.getInstance());
 	private ConsoleDAO cdao = new ConsoleDAO(ProjetConnection.getInstance());
 	private ExemplaireDAO edao = new ExemplaireDAO(ProjetConnection.getInstance());
+	private ReservationDAO rdao = new ReservationDAO(ProjetConnection.getInstance());
 	private JTextField txtNomJeu;
 	private String[] tab = new String[8];
 	private JList<Jeu> listJeux;
@@ -114,6 +116,35 @@ public class ListeJeux extends JFrame {
 		contentPane.add(btnAddEx);
 		
 		btnReser = new JButton("Faire une r\u00E9servation");
+		btnReser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(listJeux.getSelectedValue() != null) {
+					
+					if(edao.findDispo(listJeux.getSelectedValue().getIdJeu())) {
+						//Ouvrir le menu de choix des exemplaires dispos
+						JOptionPane.showMessageDialog(null, "Exemplaire(s) disponible(s)");
+					}
+					else {
+						if(!rdao.find(listJeux.getSelectedValue().getIdJeu(), u.getIdUser())) {
+
+							//Faire une réservation jusqu'à ce qu'un exemplaire soit dispo
+							JOptionPane.showMessageDialog(null, "Exemplaire(s) indisponible(s), création d'une réservation");
+							rdao.create(new Reservation(0, new Date(0), "en cours", listJeux.getSelectedValue(), u));
+							Menu m = new Menu(u);
+							m.setVisible(true);
+							dispose();
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Vous avez déjà fait une réservation sur ce jeu");
+						}
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Veuillez choisir un jeu à réserver");
+				}
+			}
+		});
 		btnReser.setEnabled(false);
 		btnReser.setBounds(198, 260, 177, 40);
 		contentPane.add(btnReser);
