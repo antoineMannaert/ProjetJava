@@ -98,7 +98,7 @@ public class ReservationDAO extends DAO<Reservation> {
 	
 	public Reservation findByIdJeu(int idJeu){
 		
-		Reservation res = new Reservation();
+		Reservation res = null;
 		Jeu j = new Jeu();
 		User u = new User();
 		DAO<Jeu> jdao = new JeuDAO(this.connect);
