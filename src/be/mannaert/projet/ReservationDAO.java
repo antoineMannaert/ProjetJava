@@ -15,7 +15,7 @@ public class ReservationDAO extends DAO<Reservation> {
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Reservation (dateRes, etat, idJeu) VALUES (Date'" + r.getDateRes() + "', '" + r.getEtatRes() + "', " + r.getJeu().getIdJeu() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Reservation (etat, idJeu) VALUES ('" + r.getEtatRes() + "', " + r.getJeu().getIdJeu() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
