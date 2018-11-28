@@ -122,13 +122,15 @@ public class ListeJeux extends JFrame {
 				if(listJeux.getSelectedValue() != null) {
 					
 					if(edao.findDispo(listJeux.getSelectedValue().getIdJeu())) {
-						//Ouvrir le menu de choix des exemplaires dispos
+						
 						JOptionPane.showMessageDialog(null, "Exemplaire(s) disponible(s)");
+						ChoixPret c = new ChoixPret(u, listJeux.getSelectedValue());
+						c.setVisible(true);
+						dispose();
 					}
 					else {
 						if(!rdao.find(listJeux.getSelectedValue().getIdJeu(), u.getIdUser())) {
 
-							//Faire une réservation jusqu'à ce qu'un exemplaire soit dispo
 							JOptionPane.showMessageDialog(null, "Exemplaire(s) indisponible(s), création d'une réservation");
 							rdao.create(new Reservation(0, new Date(0), "en cours", listJeux.getSelectedValue(), u));
 							Menu m = new Menu(u);
