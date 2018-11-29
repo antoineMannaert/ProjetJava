@@ -70,6 +70,24 @@ public class ConsoleDAO extends DAO<Console> {
 		return c;
 	}
 	
+	public Console find(String dim) {
+		
+		Console c = new Console();
+		
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console WHERE diminutif = " + dim + ";");
+			if(result.first()) {
+				c = new Console(result.getInt("idConsole"), result.getString("nomConsole"), result.getString("diminutif"));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return c;
+	}
+	
 	public String[] getDiminutifs() {
 		
 		String[] tab = new String[8];
