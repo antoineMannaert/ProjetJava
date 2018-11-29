@@ -68,6 +68,10 @@ public class Pret {
 	
 	@Override
 	public String toString() {
-		return "Votre emprunt de " + this.ex.getJeu().getNom() + "a commencé le " + this.dateDebut;
+		if(!this.fin) {
+			return "Votre emprunt de " + this.ex.getJeu().getNom() + " a commencé le " + this.dateDebut;
+		}
+		
+		return "Votre emprunt de" + this.ex.getJeu().getNom() + " s'est terminé.";
 	}
 }
