@@ -17,7 +17,7 @@ public class PretDAO extends DAO<Pret>{
 		try {
 			this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Pret (fin, idUser, idEx) VALUES ('" + p.getFin() + "', " + p.getExemplaire().getIdExemplaire() + ", " + p.getUser().getIdUser() + ");");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Pret (fin, idEx, idUser) VALUES ('" + p.getFin() + "', " + p.getExemplaire().getIdExemplaire() + ", " + p.getUser().getIdUser() + ");");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
