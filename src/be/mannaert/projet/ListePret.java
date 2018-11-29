@@ -61,10 +61,10 @@ public class ListePret extends JFrame {
 					ex = p.getExemplaire();
 					try {
 						
-						if(p.getDateFin() != null) {
+						if(!p.getFin()) {
 							
 							Date d = new Date(Calendar.getInstance().getTime().getTime());
-							p.setDateFin(d);
+							p.setFin(true);
 							ex.setDispo(true);
 							
 							if(pdao.update(p) && edao.update(ex)) {
@@ -72,14 +72,19 @@ public class ListePret extends JFrame {
 								JOptionPane.showMessageDialog(null, "Pret terminé");
 								res = rdao.findByIdJeu(ex.getJeu().getIdJeu());
 								if(res != null){
-									p = new Pret(0, d, null, edao.find(res.getIdRes()), res.getUser());
+									p = new Pret(0, d, false, edao.find(res.getIdRes()), res.getUser());
 									pdao.create(p);
-									}
+								}
+								Menu m = new Menu(u);
+								m.setVisible(true);
+								dispose();
 							}
 							else {
 								JOptionPane.showMessageDialog(null, "Pret non terminé");
+								p.setFin(false);
+								ex.setDispo(false);
 							}
-						}
+						}							
 						else {
 							JOptionPane.showMessageDialog(null, "Choisissez un pret qui n'est pas encore terminé");
 						}
