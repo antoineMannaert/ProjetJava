@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Choice;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -22,6 +23,7 @@ public class ListeJeux extends JFrame {
 	private ConsoleDAO cdao = new ConsoleDAO(ProjetConnection.getInstance());
 	private ExemplaireDAO edao = new ExemplaireDAO(ProjetConnection.getInstance());
 	private ReservationDAO rdao = new ReservationDAO(ProjetConnection.getInstance());
+	private PretDAO pdao = new PretDAO(ProjetConnection.getInstance());
 	private JTextField txtNomJeu;
 	private String[] tab = new String[8];
 	private JList<Jeu> listJeux;
@@ -92,6 +94,8 @@ public class ListeJeux extends JFrame {
 				
 				Jeu j = listJeux.getSelectedValue();
 				Exemplaire ex;
+				Reservation res;
+				Pret p;
 				
 				if(j != null) {
 					
@@ -99,6 +103,12 @@ public class ListeJeux extends JFrame {
 					if(edao.create(ex)) {
 						
 						JOptionPane.showMessageDialog(null, "Mise à jour de votre liste d'exemplaires effectuée");
+						res = rdao.findByIdJeu(ex.getJeu().getIdJeu());
+						if(res != null){
+							Date d = new Date(Calendar.getInstance().getTime().getTime());
+							p = new Pret(0, d, false, edao.find(res.getIdRes()), res.getUser());
+							pdao.create(p);
+						}
 						Menu m = new Menu(udao.find(u.getIdUser()));
 						m.setVisible(true);
 						dispose();
