@@ -1,19 +1,17 @@
 package be.mannaert.projet;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.Color;
+import javax.swing.JOptionPane;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Choice;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FonctionsAdmin extends JFrame {
 
@@ -27,13 +25,13 @@ public class FonctionsAdmin extends JFrame {
 	private String[] tab = new String[8];
 	private ConsoleDAO cdao = new ConsoleDAO(ProjetConnection.getInstance());
 	private JeuDAO jdao = new JeuDAO(ProjetConnection.getInstance());
-	private JTextField txtNonJeu;
+	private JTextField txtNomJeu;
 	private JTextField txtNewTarif;
 
 	/**
 	 * Create the frame.
 	 */
-	public FonctionsAdmin() {
+	public FonctionsAdmin(User u) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -76,7 +74,46 @@ public class FonctionsAdmin extends JFrame {
 			cConsoles.add(tab[i]);
 		contentPane.add(cConsoles);
 		
-		JButton btnAjoutJeu = new JButton("Ahouter un Jeu");
+		JButton btnAjoutJeu = new JButton("Ajouter un Jeu");
+		btnAjoutJeu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(txtNom.getText()!=null && txtTarif.getText()!=null && cConsoles.getSelectedItem() != "-----") {
+					
+					try {
+					
+						String nom = txtNom.getText();
+						int tarif = Integer.parseInt(txtTarif.getText());
+						Console c = cdao.find(cConsoles.getSelectedItem());
+						Jeu j = new Jeu(0, nom, tarif, c);
+						Jeu oldJeu = jdao.find(j.getIdJeu());
+						
+						if(!j.equals(oldJeu)) {
+							
+							if(jdao.create(j)) {
+								
+								JOptionPane.showMessageDialog(null, "Jeu créé.");
+								Menu m = new Menu(u);
+								m.setVisible(true);
+								dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Jeu impossible à créer.");
+							}
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Jeu déjà créé.");
+						}
+					}
+					catch(Exception err) {
+						System.out.println(err.getMessage());
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Veuillez entrer toutes les informations.");
+				}
+			}
+		});
 		btnAjoutJeu.setBounds(10, 167, 201, 35);
 		contentPane.add(btnAjoutJeu);
 		
@@ -89,10 +126,10 @@ public class FonctionsAdmin extends JFrame {
 		lblJeu.setBounds(221, 49, 37, 26);
 		contentPane.add(lblJeu);
 		
-		txtNonJeu = new JTextField();
-		txtNonJeu.setBounds(268, 49, 156, 26);
-		contentPane.add(txtNonJeu);
-		txtNonJeu.setColumns(10);
+		txtNomJeu = new JTextField();
+		txtNomJeu.setBounds(268, 49, 156, 26);
+		contentPane.add(txtNomJeu);
+		txtNomJeu.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nouveau tarif :");
 		lblNewLabel_1.setBounds(221, 86, 89, 26);
@@ -104,7 +141,7 @@ public class FonctionsAdmin extends JFrame {
 		txtNewTarif.setColumns(10);
 		
 		JButton btnModifTarif = new JButton("Modifier le tarif");
-		btnModifTarif.setBounds(221, 170, 203, 29);
+		btnModifTarif.setBounds(221, 167, 203, 35);
 		contentPane.add(btnModifTarif);
 	}
 }
