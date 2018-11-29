@@ -78,7 +78,7 @@ public class FonctionsAdmin extends JFrame {
 		btnAjoutJeu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(txtNom.getText()!=null && txtTarif.getText()!=null && cConsoles.getSelectedItem() != "-----") {
+				if(!txtNom.getText().equals(null) && !txtTarif.getText().equals(null) && !cConsoles.getSelectedItem().equals("-----")) {
 					
 					try {
 					
@@ -141,6 +141,46 @@ public class FonctionsAdmin extends JFrame {
 		txtNewTarif.setColumns(10);
 		
 		JButton btnModifTarif = new JButton("Modifier le tarif");
+		btnModifTarif.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(!txtNomJeu.getText().equals(null) && !txtNewTarif.getText().equals(null)) {
+					
+					try {
+						
+						String nom = txtNomJeu.getText();
+						int tarif = Integer.parseInt(txtNewTarif.getText());
+						
+						Jeu j = jdao.findByNom(nom);
+						
+						if(!j.equals(null)) {
+							
+							j.setTarif(tarif);
+							
+							if(jdao.update(j)) {
+								
+								JOptionPane.showMessageDialog(null, "Jeu mise à jour.");
+								Menu m = new Menu(u);
+								m.setVisible(true);
+								dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Jeu impossible à mettre à jour.");
+							}
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Ce jeu n'existe pas.");
+						}
+					}
+					catch(Exception err) {
+						System.out.println(err.getMessage());
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Veuillez entrer toutes les informations.");
+				}
+			}
+		});
 		btnModifTarif.setBounds(221, 167, 203, 35);
 		contentPane.add(btnModifTarif);
 	}
