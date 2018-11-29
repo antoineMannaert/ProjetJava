@@ -72,6 +72,6 @@ public class Pret {
 			return "Votre emprunt de " + this.ex.getJeu().getNom() + " a commencé le " + this.dateDebut;
 		}
 		
-		return "Votre emprunt de" + this.ex.getJeu().getNom() + " s'est terminé.";
+		return "Votre emprunt de " + this.ex.getJeu().getNom() + " s'est terminé.";
 	}
 }
