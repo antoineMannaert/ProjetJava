@@ -133,12 +133,12 @@ public class Menu extends JFrame {
 		btnListPret.setBounds(10, 218, 230, 40);
 		contentPane.add(btnListPret);
 		
-		JLabel lblListJeux = new JLabel("Voyez quels jeux sont disponibles sur la plateforme \r\net ajoutez vos exemplaires");
+		JLabel lblListJeux = new JLabel("Voyez quels jeux sont disponibles sur la plateforme \r");
 		lblListJeux.setVerticalAlignment(SwingConstants.TOP);
 		lblListJeux.setBounds(250, 65, 274, 40);
 		contentPane.add(lblListJeux);
 		
-		JLabel lblListEx = new JLabel("Afficher vos exemplaires et supprimer ceux \r\nque vous ne mettez plus \u00E0 disposition");
+		JLabel lblListEx = new JLabel("Afficher vos exemplaires");
 		lblListEx.setVerticalAlignment(SwingConstants.TOP);
 		lblListEx.setBounds(250, 116, 274, 40);
 		contentPane.add(lblListEx);
@@ -154,5 +154,9 @@ public class Menu extends JFrame {
 			btnAdmin.setVisible(false);
 		}
 		contentPane.add(btnAdmin);
+		
+		JLabel lblEmprunts = new JLabel("Afficher les pr\u00EAts que vous avez fait");
+		lblEmprunts.setBounds(250, 218, 274, 40);
+		contentPane.add(lblEmprunts);
 	}
 }
